@@ -35,6 +35,12 @@ Then source it (bashrc example below):
 source ~/.bashrc
 ```
 
+Make sure to have installed ldap
+```
+sudo apt-get install -y python-dev libldap2-dev libsasl2-dev libssl-dev
+pip install python-ldap
+```
+
 Then go to the project and run this command in your project directory to install the dependencies.
 ```
 make build
