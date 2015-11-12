@@ -9,40 +9,59 @@ class BaseModel:
     DB = "scq"
 
     def is_int(self, data):
-        assert isinstance(data, (int, float)), "Must be a number"
+        try:
+            assert isinstance(data, (int, float)), "Must be a number"
+        except Exception as e:
+            print e
+            return 0
+        return data
 
     def is_truthy(self, data):
-        assert (data and True), "Must be Truthy"
+        try:
+            assert data is True, "Must be Truthy"
+        except Exception as e:
+            return 0
+        return data
+
 
     def is_falsey(self, data):
         assert (data or False), "Must be Falsey"
+        return data
 
     def is_date_string(self, data):
         try:
             time.strptime(data, '%a %b %d %H:%M:%S %Z %Y')
         except Exception as e:
             raise Exception("datestring '{0}' could not be parsed into date object:".format(data))
+        return data
 
     def is_string(self, data):
         assert isinstance(data, (str,)), "Must be a string"
+        return data
 
     def is_valid_email(self, data):
         assert re.match(r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", data) is not None, "Must be a valid email address"
+        return data
 
     def is_list(self, data):
         assert isinstance(data, (list, tuple)), "Must be a list"
+        return data
 
     def is_none(self, data):
         assert data is None, "Must be empty"
+        return data
 
     def is_user(self, user_id):
         assert db.exists('user', user_id), "Must be a valid user ID"
+        return user_id
 
     def is_content_node(self, node_id):
         assert db.exists('content_node', node_id), "Must be a valid content node"
+        return node_id
 
     def is_user_node(self, node_id):
         assert db.exists('user_node', node_id), "Must be a valid user node"
+        return node_id
 
     def is_in_list(self, alias=[]):
         def _in_list(data):
