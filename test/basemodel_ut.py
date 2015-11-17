@@ -124,8 +124,50 @@ class TestBaseModel(unittest.TestCase):
            BaseModel().is_valid_email(['a','b','c'])
 
     def test_is_list(self):
-        pass    
+        try:
+            BaseModel().is_list([1,2,3])
+        except:
+            self.fail('Error: [1,2,3] should be a valid list')
+        try:
+            BaseModel().is_list(['a'])
+        except:
+            self.fail('Error: this should be a valid list of one string entry')
+        try:
+            BaseModel().is_list(['hello', 1, 2.5, False, [1,2,3]])
+        except:
+            self.fail('Error: a list can consist of multiple data types')
+        try:
+            BaseModel().is_list(('hi', 1, True))
+        except:
+            self.fail('Error: tuples should be valid')
+        with self.assertRaises(AssertionError):
+            BaseModel().is_list(1)
+        with self.assertRaises(AssertionError):
+            BaseModel().is_list('hi')
+        with self.assertRaises(AssertionError):
+            BaseModel().is_list(True)
 
+    def test_is_none(self):
+        try:
+            BaseModel().is_none(None)
+        except:
+            self.fail('Error: None should be empty') 
+        with self.assertRaises(AssertionError):
+            BaseModel().is_none('')
+        with self.assertRaises(AssertionError):
+            BaseModel().is_none(0)
+        with self.assertRaises(AssertionError):
+            BaseModel().is_none([])
+        with self.assertRaises(AssertionError):
+            BaseModel().is_none(True)
+
+    def test_is_user(self):
+        # look into this method, its giving me error 'db is note defined'
+        #try:
+        #    BaseModel().is_user(123456)
+        #except:
+        #    self.fail('Error: user is not in database')
+        pass
 
 
 
