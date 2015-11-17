@@ -9,14 +9,6 @@ import pdb
 
 class TestBaseModel(unittest.TestCase):
     def test_is_int(self):
-        with self.assertRaises(AssertionError):
-            BaseModel().is_int('string')
-        #with self.assertRaises(AssertionError):
-        #    BaseModel().is_int(True)
-        #with self.assertRaises(AssertionError):
-        #    BaseModel().is_int(False)
-        with self.assertRaises(AssertionError):
-            BaseModel().is_int([1,2,3])
         try:
             BaseModel().is_int(3)
         except AssertionError:
@@ -25,7 +17,16 @@ class TestBaseModel(unittest.TestCase):
             BaseModel().is_int(15.235232)
         except AssertionError:
             self.fail('Error: 15.235232 is not recognized as a number from is_int')
-       
+
+        with self.assertRaises(AssertionError):
+            BaseModel().is_int('string')
+        #with self.assertRaises(AssertionError):
+        #    BaseModel().is_int(True)
+        #with self.assertRaises(AssertionError):
+        #    BaseModel().is_int(False)
+        with self.assertRaises(AssertionError):
+            BaseModel().is_int([1,2,3])
+               
     def test_is_truthy(self):
         #self.assertTrue(BaseModel().is_truthy(True), 'Error: is_truthy(True) should return True')
         #self.assertEqual(BaseModel().is_truthy(123), 0, 'Error: is_truthy(123) should return 0')
@@ -65,6 +66,72 @@ class TestBaseModel(unittest.TestCase):
             BaseModel().is_date_string(False)
         with self.assertRaises(Exception):
             BaseModel().is_date_string(123.123)
+
+    def test_is_string(self):
+        try:
+            BaseModel().is_string('hello')
+        except:
+            self.fail('Error: hello should be a valid string')
+        with self.assertRaises(AssertionError):
+            BaseModel().is_string(123)
+        with self.assertRaises(AssertionError):
+            BaseModel().is_string(15.2)
+        with self.assertRaises(AssertionError):
+            BaseModel().is_string(True)
+        with self.assertRaises(AssertionError):
+            BaseModel().is_string(False)
+        with self.assertRaises(AssertionError):
+            BaseModel().is_string([1,2,3])
+        with  self.assertRaises(AssertionError):
+            BaseModel().is_string(['this', 'is', 'string', 'array'])
+
+    def test_is_valid_email(self):
+        try:
+            BaseModel().is_valid_email('suba8204@colorado.edu')
+        except:
+            self.fail('Error: this should be a valid colorado school email')
+        try:
+            BaseModel().is_valid_email('sung.bae@colorado.edu')
+        except:
+            self.fail('Error: first.last@colorado.edu should be a valid email')
+        try:
+            BaseModel().is_valid_email('someUserName@someEmailDomain.something')
+        except:
+            self.fail('Error: this has the correct syntax for a valid email')
+        try:
+            BaseModel().is_valid_email('user.user.user123456789@colorado.edu')
+        except:
+            self.fail('Error: this has the correct syntax for a valid email')
+        with self.assertRaises(AssertionError):
+            BaseModel().is_valid_email('thisEmailShouldNotWork!@colorado.edu')
+        with self.assertRaises(AssertionError):
+            BaseModel().is_valid_email('invalidEmail@yahoo!.com')
+        #data_types = ['hello', 1, 1.5, True, [1,2,3], ['a','b','c']]
+        #with self.assertRaises(AssertionError):
+        #    for n in data_types:
+        #        BaseModel().is_valid_email(n)
+        with self.assertRaises(AssertionError):
+            BaseModel().is_valid_email('hello')
+        with self.assertRaises(Exception):
+           BaseModel().is_valid_email(1)
+        with self.assertRaises(Exception):
+           BaseModel().is_valid_email(1.5)
+        with self.assertRaises(Exception):
+           BaseModel().is_valid_email(True)
+        with self.assertRaises(Exception):
+           BaseModel().is_valid_email([1,2,3])
+        with self.assertRaises(Exception):
+           BaseModel().is_valid_email(['a','b','c'])
+
+    def test_is_list(self):
+        pass    
+
+
+
+
+
+
+
 
 
 
