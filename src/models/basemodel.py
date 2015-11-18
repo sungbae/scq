@@ -6,7 +6,7 @@ import logging
 
 class BaseModel:
     conn = r.connect(host='localhost', port=28015)
-    DB = "scq"
+    db = "scq"
 
     def is_int(self, data):
         assert isinstance(data, (int, float)), "Must be a number"
