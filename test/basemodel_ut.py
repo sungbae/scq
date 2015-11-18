@@ -169,7 +169,47 @@ class TestBaseModel(unittest.TestCase):
         #    self.fail('Error: user is not in database')
         pass
 
+    def test_is_content_node(self):
+        pass
 
+    def test_is_user_node(self):
+        pass
+
+    def test_is_in_list(self):
+        pass
+
+    def test_is_in_range(self):
+        pass
+
+    def test_schema_recurse(self):
+        pass
+
+    def test_schema_or(self):
+        pass
+
+    def test_shema_list_check(self):
+        pass
+
+    def test_check_data(self):
+        pass
+
+    def test_fields(self):
+        pass
+
+    def test_required_fields(self):
+        pass
+
+    def test_verify(self):
+        pass
+
+    def test_get_item(self):
+        pass
+
+    def test_create_item(self):
+        pass
+
+    def test_init(self):
+        pass
 
 
 
