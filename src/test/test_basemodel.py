@@ -1,11 +1,6 @@
 import unittest
-import sys
-sys.path.append("../src/models/")
 
-from basemodel import BaseModel
-
-
-import pdb
+from models.basemodel import BaseModel
 
 class TestBaseModel(unittest.TestCase):
     def test_is_int(self):
@@ -56,8 +51,10 @@ class TestBaseModel(unittest.TestCase):
             BaseModel().is_date_string('Sat Apr 9 24:00:00 GMT 2012')
         # This shouldn't raise an exception, it should be a valid date string
         # but it doesn't like 'PST', 'EST'
-        #with self.assertRaises(Exception):
-        #    BaseModel().is_date_string('Sat Aug 25 23:00:00 PST 2013')
+        with self.assertRaises(Exception):
+            BaseModel().is_date_string('Sat Aug 25 23:00:00 PST 2013')
+        with self.assertRaises(Exception):
+            BaseModel().is_date_string('Tue Oct 10 10:50:46 EST 2012')
         with self.assertRaises(Exception):
             BaseModel().is_date_string(123)
         with self.assertRaises(Exception):
@@ -210,11 +207,6 @@ class TestBaseModel(unittest.TestCase):
 
     def test_init(self):
         pass
-
-
-
-
-
 
 
 if __name__ == '__main__':
