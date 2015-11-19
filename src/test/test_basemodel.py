@@ -173,6 +173,7 @@ class TestBaseModel(unittest.TestCase):
         pass
 
     def test_is_in_list(self):
+        # How is the inner function going to work if no data is specified?
         pass
 
     def test_is_in_range(self):
@@ -184,22 +185,16 @@ class TestBaseModel(unittest.TestCase):
     def test_schema_or(self):
         pass
 
-    def test_shema_list_check(self):
+    def test_requiredFields(self):
         pass
 
-    def test_check_data(self):
-        pass
-
-    def test_fields(self):
-        pass
-
-    def test_required_fields(self):
-        pass
-
-    def test_verify(self):
+    def test_isValid(self):
         pass
 
     def test_get_item(self):
+        pass
+
+    def test_find(self):
         pass
 
     def test_create_item(self):
