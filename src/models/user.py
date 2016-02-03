@@ -13,6 +13,7 @@ class User(BaseModel):
     USER_GENDERS            = ['Male', 'Female', 'Other', NO_DISCLOSURE]
     USER_ETHNICITIES        = ['American Indian or Alaska Native', 'Asian', 'Black or African American', 'Hispanic or Latino', 'Native Hawaiian or Other Pacific Islander', 'White', 'Other', NO_DISCLOSURE]
     USER_NATIVE_LANGUAGES   = ['English', 'Spanish', 'French', 'German', 'Korean', 'Chinese', 'Japanese', 'Russian', 'Arabic', 'Portuguese', 'Hindi', 'Other', NO_DISCLOSURE]
+    #USER_AFFLIATION = ['Student', 'Faculty']
 
     # must be overridden
     def requiredFields(self):
@@ -37,6 +38,7 @@ class User(BaseModel):
             'unanswered_surveys' : (b.is_list,),
             'answered_surveys' : (b.is_list,),
             'answers' : (b.is_list,),
+            'primary_affiliation' : (b.is_list,),
         }
 
     # returns default user data, that can be overwritten. Good for templating a new user
@@ -45,7 +47,7 @@ class User(BaseModel):
             'registration' : self.REGISTRATION_TESTING,
             'username' : '',
             'email' : '',
-            'accepted_tos' : False,
+            'accepted_tos' : True,
             'gender' : self.USER_GENDERS[-1],
             'ethnicity' : self.USER_ETHNICITIES[-1],
             'native_language' : self.USER_NATIVE_LANGUAGES[-1],
@@ -57,6 +59,7 @@ class User(BaseModel):
             'answered_surveys' : [],
             'created_surveys' : [],
             'answers' : [],
+            'primary_affiliation' : [],
         }
 
     def authenticate_test_user(self,username,password):
