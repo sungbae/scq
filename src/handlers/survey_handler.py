@@ -26,7 +26,7 @@ class SurveyHandler(BaseHandler):
         if user_data is None:
             data = models.survey.Survey().get_all()
         else:
-            courses = user_data['courses']
+            courses = set(user_data['courses'] + user_data['courses_taught'])
             for course in courses:
                 data += models.survey.Survey().find({'course': course,})
         self.write(json.dumps(data))

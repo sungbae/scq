@@ -45,15 +45,17 @@
   {% if len(courses) == 0 %}
     <li>{{ 'not enrolled into any courses' }}</li><br>
   {% else %}
-    <li>{{ courses }}</li><br>
+    {% for course in courses %}
+      <li>{{ course }}</li><br>
+    {% end %}
   {% end %}
 {% end %}
 {% if "Faculty" in primary_affiliation %}
   <label><b>Courses Instructed</b></label><br>
-  {% if len(courses) == 0 %}
+  {% if len(courses_taught) == 0 %}
     <li>{{ 'not instructing any courses' }}</li><br>
   {% else %}
-    <li>{{ courses }}</li><br>
+    <li>{{ courses_taught }}</li><br>
   {% end %}
 {% end %}
 <form action="/userinfo/update" method="get">

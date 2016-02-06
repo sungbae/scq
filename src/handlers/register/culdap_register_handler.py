@@ -55,6 +55,13 @@ class CuLdapRegisterHandler(RegisterHandler):
         data['username']        = username
         data['registration']    = User().REGISTRATION_CULDAP
         data['accepted_tos']    = True
+        data['primary_affiliation'] = ['Student', 'Faculty']
+        print('The data type for departments is ')
+        print(type(data['departments']))
+        print('The data type for primary_affiliation is ')
+        print(type(data['primary_affiliation']))
+        print('The data type for courses is ')
+        print(type(data['courses']))
         return self.registerUser(data)
 
     def collectUserData(self):
@@ -71,10 +78,11 @@ class CuLdapRegisterHandler(RegisterHandler):
         data['major4']          = self.get_argument('major4',None,strip = True)
         data['minor1']          = self.get_argument('minor1',None,strip = True)
         data['minor2']          = self.get_argument('minor2',None,strip = True)
+        print(type(data['departments']))
         data['departments']      = self.get_argument('departments', None,strip = True)
-        data['departments'] = data['departments'].split(',')
+        data['departments'] = data['departments']
         data['primary_affiliation'] = self.get_argument('primary_affiliation', None,strip = True)
-        data['primary_affiliation'] = data['primary_affiliation'].split(',')
+        data['primary_affiliation'] = data['primary_affiliation']
         return data
 
 

@@ -8,10 +8,6 @@ class UserInfoUpdateHandler(BaseHandler):
     def get(self, input=None, errors=[]):
         user_info_dict = self.current_user
         verified = User().verify(user_info_dict)
-        if len(verified) != 0:
-            logging.error('User: verification errors!')
-            logging.error(verified)
-            return self.verifyCULdapRegistrationPage(user_info_dict['username'], verified)
         username = user_info_dict['username']
         email = user_info_dict['email']
         status = user_info_dict['status']
@@ -25,8 +21,14 @@ class UserInfoUpdateHandler(BaseHandler):
         courses = user_info_dict['courses']
         if len(courses) == 0:
             courses = ['']
+        print(user_info_dict)
+        courses_taught = user_info_dict['courses_taught']
+        if len(courses_taught) == 0:
+            courses_taught = ['']
         departments = user_info_dict['departments']
         primary_affiliation = user_info_dict['primary_affiliation']
+
+
         self.render('userupdate.html',
         errors=errors,
         next=self.get_argument("next","/"),
@@ -46,12 +48,13 @@ class UserInfoUpdateHandler(BaseHandler):
         major4= self.get_argument('major4','%s'%major4,strip = True),
         minor1= self.get_argument('minor1','%s'%minor1,strip = True),
         minor2= self.get_argument('minor2','%s'%minor2,strip = True),
-        courses = self.get_argument('courses', '%s'%courses,strip = True),
-        departments = self.get_argument('departments', '%s'%departments, strip = True),
-        primary_affiliation = self.get_argument('primary_affiliation', '%s'%primary_affiliation,strip = True)
+        courses = self.get_argument('courses', default='').split(',') or courses,
+        courses_taught = self.get_argument('courses_taught','%s'%courses_taught,strip = True),
+        departments = self.get_argument('departments','%s'%departments, strip = True),
+        primary_affiliation = self.get_argument('primary_affiliation','%s'%primary_affiliation,strip = True)
         )
 
-    def post(self):
+    def post(self, errors=[]):
         data = User().default()
         data['username'] = self.current_user['username']
         data['email']           = self.get_argument('email',None,strip = True)
@@ -67,8 +70,14 @@ class UserInfoUpdateHandler(BaseHandler):
         data['minor1']          = self.get_argument('minor1',None,strip = True)
         data['minor2']          = self.get_argument('minor2',None,strip = True)
         data['courses']         = self.get_arguments('courses',strip = True)
+        data['courses_taught']  = self.get_arguments('courses_taught',strip = True)
         data['departments']     = self.get_arguments('departments',strip = True)
         data['primary_affiliation'] = self.get_arguments('primary_affiliation',strip = True)
-        User().verify(data)
+        data['primary_affiliation'] = ['Student']
+        verified = User().verify(data)
+        if len(verified) != 0:
+            logging.error('User: verification errors in update!')
+            logging.error(verified)
+            return self.get(verified)
         User().update_item(self.current_user['id'], data)
         return self.redirect(self.get_argument("next", "/dashboard"))
