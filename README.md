@@ -80,28 +80,9 @@ sudo apt-get install rethinkdb
 
 ## API Documentation
 
-User Register
+#####User Information
 
-Register as a user (must be CU affiliated)
-```
-POST /register
-```
-Example usage; file must contain username & password:
-```
-curl --form "username=identiKeyUser&password=identiKeyPass" http://localhost:8000/register
-```
-Pass in desired user information to finalize registration
-```
-POST /register/culdap
-```
-Example usage for student; file must contain basic user information:
-```
-curl --form "fileupload=@my-file.txt" http://localhost:8000/register/culdap
-```
-
-User Information
-
-List user information
+_List user information._
 ```
 GET /api/me
 ```
@@ -110,12 +91,13 @@ Example usage:
 curl -u username:password http://localhost:8000/api/me
 ```
 Parameter:
+
 | Field               | Type          | Description                    |
 | ------------------- |:-------------:| ------------------------------:|
 | username            | String        | The Users-Username             |
 | password            | String        | The Users-Password             |
 
-Change user information
+_Change user information._
 ```
 POST /api/me
 ```
@@ -124,6 +106,7 @@ Example usage:
 curl -d "native_language=English" http://localhost:8000/api/me
 ```
 Parameter:
+
 | Field               | Type          | Description                    |
 | ------------------- |:-------------:| ------------------------------:|
 | email               | String        | The Users-email                |
@@ -139,6 +122,51 @@ Parameter:
 | courses_taught      | String[]      | The Users-Courses Taught       |
 | primary_affiliation | String[]      | The Users-Affiliation to CU    |
 
-User Surveys
+#####User Surveys
 
-User Response
+_Display surveys taken by user._
+```
+GET /api/surveys
+```
+Example usage:
+```
+curl -u username:password http://localhost:8000/api/surveys
+```
+Parameter:
+| Field               | Type          | Description                    |
+| ------------------- |:-------------:| ------------------------------:|
+| username            | String        | The Users-Username             |
+| password            | String        | The Users-Password             |
+
+_Create/Update user's survey._
+```
+POST /api/surveys
+```
+Example usage:
+```
+curl -u username:password -F "fileupload=@my-file.json" http://localhost:8000/api/surveys
+```
+######Take a look at schema/sampleSurvey.json for reference.
+
+#####User Response
+
+_Create and record user's response to a survey._
+```
+POST /api/response
+```
+Example usage:
+```
+curl -u username:password -F "fileupload=@my-file.json" http://localhost:8000/api/response
+```
+######Take a look at schema/sampleSurvey.json or reference.
+
+#####User Refresh
+
+_Refresh user's cookie._
+```
+GET /api/refresh
+```
+Example usage:
+```
+curl -u username:password http://localhost:8000/api/refresh
+```
