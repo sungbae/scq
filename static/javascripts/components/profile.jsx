@@ -4,8 +4,8 @@ getInitialState: function(){
     var courses = '';
     var courses_taught = '';
     var status = '';
-    
-    
+
+
     if(user_data[0].departments.length == 0 || user_data[0].departments == ['']){
         console.log('default');
         departments = 'Not enrolled into any departments';
@@ -20,7 +20,7 @@ getInitialState: function(){
             console.log("Departments state: " + departments);
         }
     }
-    
+
     if(user_data[0].primary_affiliation == "Student"){
         if(user_data[0].status){
             status = user_data[0].status;
@@ -42,7 +42,7 @@ getInitialState: function(){
             }
         }
     }
-    
+
     else if(user_data[0].primary_affiliation[0] == "Faculty"){
         if(user_data[0].courses_taught.length == 0 || user_data[0].courses_taught == ['']){
             courses_taught = 'Not enrolled into any departments';
@@ -74,15 +74,15 @@ getInitialState: function(){
             </div>
             <div className="mdl-card__supporting-text">
             Username: {user_data[0].username} <br/>
-            User Type: {user_data[0].primary_affiliation} <br/>
+            Affiliation(s): {user_data[0].primary_affiliation} <br/>
             Email: {user_data[0].email} <br/>
             Birth Date: {user_data[0].dob} <br/>
             Gender: {user_data[0].gender} <br/>
             Ethnicity: {user_data[0].ethnicity} <br/>
             Native Language: {user_data[0].native_language} <br/>
-            Status: {this.state.status} <br/>
-            Courses Enrolled: {this.state.courses} <br/>
-            Departments: {this.state.departments} <br/>
+            Academic Year: {this.state.status} <br/>
+            Course(s) Enrolled: {this.state.courses} <br/>
+            Department(s): {this.state.departments} <br/>
             </div>
         </div>
     );
