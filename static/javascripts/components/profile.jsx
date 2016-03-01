@@ -73,16 +73,16 @@ getInitialState: function(){
                 <h2 className="mdl-card__title-text">User Info&nbsp;&nbsp;&nbsp;&nbsp;</h2>
             </div>
             <div className="mdl-card__supporting-text">
-                Username: <input type="text" value={user_data[0].username}></input> <br/>
-                Affiliation(s): <input type="text" value={user_data[0].primary_affiliation}></input> <br/>
-                Email: <input type="text" value={user_data[0].email}></input> <br/>
-                Birth Date: <input type="text" value={user_data[0].dob}></input> <br/>
-                Gender: <option value="{user_data[0].gender}">{ user_data[0].gender }</option> <br/>
-                Ethnicity: {user_data[0].ethnicity} <br/>
-                Native Language: {user_data[0].native_language} <br/>
-                Academic Year: {this.state.status} <br/>
-                Course(s) Enrolled: {this.state.courses} <br/>
-                Department(s): {this.state.departments} <br/>
+                Username: <input type="text" value={user_data[0].username}></input><br/>
+                Affiliation(s): <input type="text" value={user_data[0].primary_affiliation}></input><br/>
+                Email: <input type="text" value={user_data[0].email}></input><br/>
+                Birth Date: <input type="text" value={user_data[0].dob}></input><br/>
+                Gender: <option value="{user_data[0].gender}">{ user_data[0].gender }</option><br/>
+                Ethnicity: {user_data[0].ethnicity}<br/>
+                Native Language: {user_data[0].native_language}<br/>
+                Academic Year: {this.state.status}<br/>
+                Course(s) Enrolled: <textarea name="courses" cols="30" rows="5" value={this.state.courses}></textarea><br/>
+                Department(s): <textarea name="courses" cols="30" rows="5" value={this.state.departments}></textarea><br/>
                 <br/>
                 <button onclick="myFunction()">edit</button>
             </div>
