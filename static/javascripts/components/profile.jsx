@@ -4,6 +4,7 @@ getInitialState: function(){
     var courses = '';
     var courses_taught = '';
     var status = '';
+    var foo = document.createTextNode("\u00A0");
 
 
     if(user_data[0].departments.length == 0 || user_data[0].departments == ['']){
@@ -64,25 +65,26 @@ getInitialState: function(){
     status: status,
     }
 },
-
     render: function(){
     console.log(user_data)
     return(
         <div className="mdl-card mdl-shadow--2dp">
             <div className="mdl-card__title mdl-color--primary">
-                <h2 className="mdl-card__title-text">User Info</h2>
+                <h2 className="mdl-card__title-text">User Info&nbsp;&nbsp;&nbsp;&nbsp;</h2>
             </div>
             <div className="mdl-card__supporting-text">
-            Username: {user_data[0].username} <br/>
-            Affiliation(s): {user_data[0].primary_affiliation} <br/>
-            Email: {user_data[0].email} <br/>
-            Birth Date: {user_data[0].dob} <br/>
-            Gender: {user_data[0].gender} <br/>
-            Ethnicity: {user_data[0].ethnicity} <br/>
-            Native Language: {user_data[0].native_language} <br/>
-            Academic Year: {this.state.status} <br/>
-            Course(s) Enrolled: {this.state.courses} <br/>
-            Department(s): {this.state.departments} <br/>
+                Username: <input type="text" value={user_data[0].username}></input> <br/>
+                Affiliation(s): <input type="text" value={user_data[0].primary_affiliation}></input> <br/>
+                Email: <input type="text" value={user_data[0].email}></input> <br/>
+                Birth Date: <input type="text" value={user_data[0].dob}></input> <br/>
+                Gender: <option value="{user_data[0].gender}">{ user_data[0].gender }</option> <br/>
+                Ethnicity: {user_data[0].ethnicity} <br/>
+                Native Language: {user_data[0].native_language} <br/>
+                Academic Year: {this.state.status} <br/>
+                Course(s) Enrolled: {this.state.courses} <br/>
+                Department(s): {this.state.departments} <br/>
+                <br/>
+                <button onclick="myFunction()">edit</button>
             </div>
         </div>
     );

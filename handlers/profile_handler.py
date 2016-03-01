@@ -11,6 +11,9 @@ class ProfileHandler(BaseHandler):
         self.refresh_current_user_cookie()
         self.render('profile.html', user_info_json=self.get_user_info())
 
+    def post(self):
+        pass
+
     def get_user_info(self):
         user_info_json = []
         user_data = self.current_user

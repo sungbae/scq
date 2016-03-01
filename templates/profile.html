@@ -6,15 +6,14 @@
       surveys: "/api/surveys",
       response: "/api/response"
   };
-  
   ReactDOM.render(React.createElement(ProfilePage, {routes: routesObject}), document.getElementById('main-grid'));
 {% end %}
 {% block content %}
 <script>
     function myFunction() {
         document.getElementById("demo").value = "75";
+        document.getElementById("form").innerHTML = "Hello World";
     }
-
 </script>
   <div class = "mdl-grid content" id="main-grid">
   </div>

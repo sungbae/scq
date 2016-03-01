@@ -16,6 +16,7 @@ class User(BaseModel):
     USER_GENDERS = ['Male', 'Female', 'Other', NO_DISCLOSURE]
     USER_ETHNICITIES = ['American Indian or Alaska Native', 'Asian', 'Black or African American', 'Hispanic or Latino', 'Native Hawaiian or Other Pacific Islander', 'White', 'Other', NO_DISCLOSURE]
     USER_NATIVE_LANGUAGES = ['English', 'Spanish', 'French', 'German', 'Korean', 'Chinese', 'Japanese', 'Russian', 'Arabic', 'Portuguese', 'Hindi', 'Other', NO_DISCLOSURE]
+    USER_STATUS = ['Freshman', 'Sophomore', 'Junior', 'Senior']
 
     # must be overridden
     def requiredFields(self):
@@ -44,6 +45,7 @@ class User(BaseModel):
             'survey_responses': (b.is_list,),
             'answers': (b.is_list,),
             'primary_affiliation': (b.is_string,),
+            'status': (b.is_string, b.is_in_list(self.USER_STATUS),),
         }
 
     # returns default user data, that can be overwritten. Good for templating a new user
