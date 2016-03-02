@@ -3,19 +3,16 @@
 {% block react %}
   var user_data={% raw user_info_json %};
   var routesObject = {
-      surveys: "/api/surveys",
-      response: "/api/response"
+    surveys: "/api/surveys",
+    response: "/api/response"
   };
   ReactDOM.render(React.createElement(ProfilePage, {routes: routesObject}), document.getElementById('main-grid'));
 {% end %}
 {% block content %}
 <script>
-    function myFunction() {
-        document.getElementById("demo").value = "75";
-        document.getElementById("demo").innerHTML = "Hello World";
-        document.getElementById("myText").readOnly = true;
-    }
+  function myFunction() {
+      document.getElementById("demo").value = "75";
+  }
 </script>
-  <div class = "mdl-grid content" id="main-grid">
-  </div>
+<div class = "mdl-grid content" id="main-grid"></div>
 {% end %}
