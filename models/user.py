@@ -17,6 +17,7 @@ class User(BaseModel):
     USER_ETHNICITIES = ['American Indian or Alaska Native', 'Asian', 'Black or African American', 'Hispanic or Latino', 'Native Hawaiian or Other Pacific Islander', 'White', 'Other', NO_DISCLOSURE]
     USER_NATIVE_LANGUAGES = ['English', 'Spanish', 'French', 'German', 'Korean', 'Chinese', 'Japanese', 'Russian', 'Arabic', 'Portuguese', 'Hindi', 'Other', NO_DISCLOSURE]
     USER_STATUS = ['Freshman', 'Sophomore', 'Junior', 'Senior']
+    USER_PRIMARY_AFFILIATION = ['Student', 'Faculty', 'Both']
 
     # must be overridden
     def requiredFields(self):
@@ -44,7 +45,7 @@ class User(BaseModel):
             'answered_surveys': (b.is_list,),
             'survey_responses': (b.is_list,),
             'answers': (b.is_list,),
-            'primary_affiliation': (b.is_string,),
+            'primary_affiliation': (b.is_string, b.is_in_list(self.USER_PRIMARY_AFFILIATION),),
             'status': (b.is_string, b.is_in_list(self.USER_STATUS),),
         }
 
@@ -70,7 +71,8 @@ class User(BaseModel):
             'created_surveys': [],
             'survey_responses': [],
             'answers': [],
-            'primary_affiliation': '',
+            'primary_affiliation': self.USER_PRIMARY_AFFILIATION[-1],
+            'status': self.USER_STATUS[-1],
         }
 
     def create_generic_item(self):
