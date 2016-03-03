@@ -17,7 +17,14 @@ class ProfileHandler(BaseHandler):
 
     def get_extra_info(self):
         extra_info_json = []
-        extra_info_json.append({'gender': User.USER_GENDERS})
+        extra_dict = {
+            'gender': User.USER_GENDERS,
+            'primary_affiliation': User.USER_PRIMARY_AFFILIATION,
+            'ethnicity': User.USER_ETHNICITIES,
+            'native_language': User.USER_NATIVE_LANGUAGES,
+            'status': User.USER_STATUS
+        }
+        extra_info_json.append(extra_dict)
         return tornado.escape.json_encode(extra_info_json)
 
     def get_user_info(self):

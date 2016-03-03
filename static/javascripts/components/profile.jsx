@@ -53,14 +53,22 @@ var ProfilePage = React.createClass({
       }
     }
     return {
+      username: user_data[0].username,
+      user_affiliation: user_data[0].primary_affiliation,
+      email: user_data[0].email,
+      user_gender: user_data[0].gender,
+      user_ethnicity: user_data[0].ethnicity,
+      user_native_language: user_data[0].native_language,
+      user_status: user_data[0].status,
       departments: departments,
       courses: courses,
       courses_taught: courses_taught,
-      user_status: user_status,
-      username: user_data[0].username,
-      email: user_data[0].email,
-      gender: user_data[0].gender,
-      extra_gender: extra_data[0].gender
+      affiliation: extra_data[0].primary_affiliation,
+      gender: extra_data[0].gender,
+      ethnicity: extra_data[0].ethnicity,
+      native_language: extra_data[0].native_language,
+      status: extra_data[0].status,
+
     };
   },
   _onClick: function() {
@@ -83,16 +91,28 @@ var ProfilePage = React.createClass({
           </div>
           <div className="mdl-card__supporting-text">
             Username: <input value={this.state.username} onChange={this.handleChange('username')} /><br/>
-            Affiliation(s): <input type="text" value={user_data[0].primary_affiliation} onChange={this.handleChange} /><br/>
+            Affiliation(s): <select>
+                              <option value={this.state.user_affiliation}>{this.state.user_affiliation}</option>
+                              <option value={this.state.affiliation}>{this.state.affiliation}</option>
+                            </select><br/>
             Email: <input value={this.state.email} onChange={this.handleChange('email')} /><br/>
             Birth Date: <input type="text" value={user_data[0].dob}/><br/>
             Gender: <select>
+                      <option value={this.state.user_gender}>{this.state.user_gender}</option>
                       <option value={this.state.gender}>{this.state.gender}</option>
-                      <option value={this.state.extra_gender}>{this.state.extra_gender[0]}</option>
                     </select><br/>
-            Ethnicity: {user_data[0].ethnicity}<br/>
-            Native Language: {user_data[0].native_language}<br/>
-            Academic Year: {this.state.user_status}<br/>
+            Ethnicity: <select>
+                         <option value={this.state.user_ethnicity}>{this.state.user_ethnicity}</option>
+                         <option value={this.state.ethnicity}>{this.state.ethnicity}</option>
+                       </select><br/>
+            Native Language: <select>
+                               <option value={this.state.user_native_language}>{this.state.user_native_language}</option>
+                               <option value={this.state.native_language}>{this.state.native_language}</option>
+                             </select><br/>
+            Academic Year: <select>
+                             <option value={this.state.user_status}>{this.state.user_status}</option>
+                             <option value={this.state.status}>{this.state.status}</option>
+                           </select><br/>
             Course(s) Enrolled: <textarea name="courses" cols="30" rows="5" value={this.state.courses} /><br/>
             Department(s): <textarea name="courses" cols="30" rows="5" value={this.state.departments} /><br/>
             <br/>
