@@ -1,48 +1,23 @@
 var ProfilePage = React.createClass({
   getInitialState: function(){
-    var departments = '';
-    var courses = '';
-    var courses_taught = '';
+    var user_groups = '';
     var user_status = '';
-    var num_departments = user_data[0].departments.length;
-    if ((num_departments == 0) || (user_data[0].departments == [''])) {
-      departments = 'Not enrolled into any departments';
+    var num_sub_groups = user_data[0].subscribed_groups.length;
+    if ((num_sub_groups == 0) || (user_data[0].subscribed_groups == [''])) {
+      user_groups = 'Not subscribed into any groups';
     } else {
-      for (var i = 0; i < num_departments; i++) {
-        departments += user_data[0].departments[i];
-        if (i < num_departments - 1) {
-          departments += "\n";
+      for (var i = 0; i < num_sub_groups; i++) {
+        user_groups += user_data[0].subscribed_groups[i];
+        if (i < num_sub_groups - 1) {
+          user_groups += "\n";
         }
       }
     }
     if (user_data[0].primary_affiliation == "Student") {
-      var num_courses = user_data[0].courses.length;
       if (user_data[0].status) {
         user_status = user_data[0].status;
       } else {
         user_status = "Did not specify academic year";
-      }
-      if ((num_courses == 0) || (user_data[0].courses == [''])) {
-        courses = 'Not enrolled into any courses';
-      } else {
-        for (var i = 0; i < num_courses; i++) {
-          courses += user_data[0].courses[i];
-          if (i < num_courses - 1) {
-            courses += "\n";
-          }
-        }
-      }
-    } else if (user_data[0].primary_affiliation == "Faculty") {
-      var num_courses_taught = user_data[0].courses_taught.length;
-      if ((num_courses_taught == 0) || (user_data[0].courses_taught == [''])) {
-        courses_taught = 'Not enrolled into any departments';
-      } else {
-        for (var i = 0; i < num_courses_taught; i++) {
-          courses_taught += user_data[0].courses_taught[i];
-          if (i < num_courses_taught - 1) {
-            courses_taught += "\n";
-          }
-        }
       }
     }
     return {
@@ -53,9 +28,7 @@ var ProfilePage = React.createClass({
       user_ethnicity: user_data[0].ethnicity,
       user_native_language: user_data[0].native_language,
       user_status: user_data[0].status,
-      departments: departments,
-      courses: courses,
-      courses_taught: courses_taught,
+      user_groups: user_groups,
       affiliation: extra_data[0].primary_affiliation,
       gender: extra_data[0].gender,
       ethnicity: extra_data[0].ethnicity,
@@ -105,8 +78,7 @@ var ProfilePage = React.createClass({
                        <option value={this.state.user_status}>{this.state.user_status}</option>
                        <option value={this.state.status}>{this.state.status}</option>
                      </select><br/>
-      Course(s) Enrolled: <textarea name="courses" cols="30" rows="5" value={this.state.courses} /><br/>
-      Department(s): <textarea name="courses" cols="30" rows="5" value={this.state.departments} /><br/>
+      Group(s) Subscribed: <textarea name="courses" cols="30" rows="5" value={this.state.user_groups} /><br/>
       <br/>
       <button onClick={this._onClick} value="Change Message">{this.state.message}</button>
       </ul>
