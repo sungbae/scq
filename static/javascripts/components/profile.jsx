@@ -6,17 +6,13 @@ var ProfilePage = React.createClass({
     var user_status = '';
     var num_departments = user_data[0].departments.length;
     if ((num_departments == 0) || (user_data[0].departments == [''])) {
-      console.log('default');
       departments = 'Not enrolled into any departments';
     } else {
       for (var i = 0; i < num_departments; i++) {
         departments += user_data[0].departments[i];
         if (i < num_departments - 1) {
-          console.log("new line");
           departments += "\n";
         }
-        // Do we want to log this into the console every iteration in the forloop?
-        console.log("Departments state: " + departments);
       }
     }
     if (user_data[0].primary_affiliation == "Student") {
@@ -32,10 +28,8 @@ var ProfilePage = React.createClass({
         for (var i = 0; i < num_courses; i++) {
           courses += user_data[0].courses[i];
           if (i < num_courses - 1) {
-            console.log("new line");
             courses += "\n";
           }
-          console.log("Courses state: " + courses);
         }
       }
     } else if (user_data[0].primary_affiliation == "Faculty") {
@@ -48,7 +42,6 @@ var ProfilePage = React.createClass({
           if (i < num_courses_taught - 1) {
             courses_taught += "\n";
           }
-          console.log("Courses taught state: " + courses_taught);
         }
       }
     }
@@ -82,43 +75,41 @@ var ProfilePage = React.createClass({
       this.setState(state);
     }.bind(this);
   },
-    render: function() {
-      console.log(user_data)
-      return(
-        <div className="mdl-card mdl-shadow--2dp">
-          <div className="mdl-card__title mdl-color--primary">
-            <h2 className="mdl-card__title-text">User Info&nbsp;&nbsp;&nbsp;&nbsp;</h2>
-          </div>
-          <div className="mdl-card__supporting-text">
-            Username: <input value={this.state.username} onChange={this.handleChange('username')} /><br/>
-            Affiliation(s): <select>
-                              <option value={this.state.user_affiliation}>{this.state.user_affiliation}</option>
-                              <option value={this.state.affiliation}>{this.state.affiliation}</option>
-                            </select><br/>
-            Email: <input value={this.state.email} onChange={this.handleChange('email')} /><br/>
-            Birth Date: <input type="text" value={user_data[0].dob}/><br/>
-            Gender: <select>
-                      <option value={this.state.user_gender}>{this.state.user_gender}</option>
-                      <option value={this.state.gender}>{this.state.gender}</option>
-                    </select><br/>
-            Ethnicity: <select>
-                         <option value={this.state.user_ethnicity}>{this.state.user_ethnicity}</option>
-                         <option value={this.state.ethnicity}>{this.state.ethnicity}</option>
+  render: function(){
+    var style = {
+      listStyleType: "none",
+      fontSize: "20px"
+    };
+    return(
+      <ul style={style}>
+      Username: <input value={this.state.username} onChange={this.handleChange('username')} /><br/>
+      Affiliation(s): <select>
+                        <option value={this.state.user_affiliation}>{this.state.user_affiliation}</option>
+                        <option value={this.state.affiliation}>{this.state.affiliation}</option>
+                      </select><br/>
+      Email: <input value={this.state.email} onChange={this.handleChange('email')} /><br/>
+      Birth Date: <input type="text" value={user_data[0].dob}/><br/>
+      Gender: <select>
+                <option value={this.state.user_gender}>{this.state.user_gender}</option>
+                <option value={this.state.gender}>{this.state.gender}</option>
+              </select><br/>
+      Ethnicity: <select>
+                   <option value={this.state.user_ethnicity}>{this.state.user_ethnicity}</option>
+                   <option value={this.state.ethnicity}>{this.state.ethnicity}</option>
+                 </select><br/>
+      Native Language: <select>
+                         <option value={this.state.user_native_language}>{this.state.user_native_language}</option>
+                         <option value={this.state.native_language}>{this.state.native_language}</option>
                        </select><br/>
-            Native Language: <select>
-                               <option value={this.state.user_native_language}>{this.state.user_native_language}</option>
-                               <option value={this.state.native_language}>{this.state.native_language}</option>
-                             </select><br/>
-            Academic Year: <select>
-                             <option value={this.state.user_status}>{this.state.user_status}</option>
-                             <option value={this.state.status}>{this.state.status}</option>
-                           </select><br/>
-            Course(s) Enrolled: <textarea name="courses" cols="30" rows="5" value={this.state.courses} /><br/>
-            Department(s): <textarea name="courses" cols="30" rows="5" value={this.state.departments} /><br/>
-            <br/>
-            <button onClick={this._onClick} value="Change Message">{this.state.message}</button>
-          </div>
-        </div>
+      Academic Year: <select>
+                       <option value={this.state.user_status}>{this.state.user_status}</option>
+                       <option value={this.state.status}>{this.state.status}</option>
+                     </select><br/>
+      Course(s) Enrolled: <textarea name="courses" cols="30" rows="5" value={this.state.courses} /><br/>
+      Department(s): <textarea name="courses" cols="30" rows="5" value={this.state.departments} /><br/>
+      <br/>
+      <button onClick={this._onClick} value="Change Message">{this.state.message}</button>
+      </ul>
       );
     }
 });
